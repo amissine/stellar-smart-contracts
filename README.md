@@ -1,5 +1,5 @@
 # tx-functions
-Stellar smart contract definitions
+Stellar smart contracts - integration tests and more
 
 Moved all common dependencies up: 
 ```
@@ -18,4 +18,3 @@ Moved all common dependencies up:
     "rollup-plugin-terser": "^7.0.2"
   }
 ```
-
