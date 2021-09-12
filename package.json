@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "stellar-smart-contracts",
+  "version": "1.0.0",
+  "description": "Stellar Smart Contracts test-driven development",
+  "module": "./dist/index.mjs",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "./dev-all.sh",
+    "deploy": "npm i && npm run build && wrangler publish",
+    "pretest": "npm i && npm run build",
+    "test": "node test/initial.test.js",
+    "preinit": "npx envdist",
+    "init": "./init.sh"
+  },
+  "license": "Apache-2.0"
+}
