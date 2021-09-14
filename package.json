@@ -3,15 +3,21 @@
   "name": "stellar-smart-contracts",
   "version": "1.0.0",
   "description": "Stellar Smart Contracts test-driven development",
-  "module": "./dist/index.mjs",
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1"
+  },
   "scripts": {
     "build": "rollup -c",
-    "dev": "./dev-all.sh",
-    "deploy": "npm i && npm run build && wrangler publish",
+    "dev": "run-p start watch",
     "pretest": "npm i && npm run build",
+    "start": "bin/www.js",
     "test": "node test/initial.test.js",
-    "preinit": "npx envdist",
-    "init": "./init.sh"
+    "watch": "rollup -c -w"
   },
   "license": "Apache-2.0"
 }

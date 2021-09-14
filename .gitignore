@@ -1,8 +1,12 @@
 .DS_Store
 node_modules
-dist
+uploaded
+test
 
 package-lock.json
+
+public/bundle.js
+public/bundle.js.map
 
 # Vim
 .*.sw?

@@ -1,26 +1,23 @@
-import { terser } from 'rollup-plugin-terser'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import copy from 'rollup-plugin-copy'
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import json from "@rollup/plugin-json";
+import { terser } from 'rollup-plugin-terser';
+
+// `npm run build` -> `production` is true
+// `npm run dev` -> `production` is false
+const production = !process.env.ROLLUP_WATCH;
 
 export default {
-  input: 'src/index.mjs',
-  output: {
-    exports: 'named',
-    format: 'es',
-    file: 'dist/index.mjs',
-    sourcemap: true,
-  },
-
-  // slug.txt will be uploaded as a text module, not as part of the rollup bundle.
-  // so we must declare it as an external dependency (to be resolved at runtime).
-  external: ['./slug.txt'],
-  plugins: [
-    commonjs(),
-    nodeResolve({ browser: true }),
-    terser(),
-    copy({
-      targets: [{ src: './src/slug.txt', dest: './dist/' }],
-    }),
-  ],
-}
+	input: 'src/main.js',
+	output: {
+		file: 'public/bundle.js',
+		format: 'iife', // immediately-invoked function expression — suitable for <script> tags
+		sourcemap: true
+	},
+	plugins: [
+    json(), // to import 'stellar-sdk'
+		resolve(), // tells Rollup how to find date-fns in node_modules
+		commonjs(), // converts date-fns to ES modules
+		production && terser() // minify, but only in production
+	]
+};
