@@ -2,6 +2,7 @@
 node_modules
 uploaded
 test
+dist
 
 package-lock.json
 

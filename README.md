@@ -18,3 +18,5 @@ Moved all common dependencies up:
     "rollup-plugin-terser": "^7.0.2"
   }
 ```
+
+TODO: `"rollup": "^2.36.2"` ? rollup v2.56.3...

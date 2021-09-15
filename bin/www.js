@@ -3,6 +3,8 @@
 // https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
 const express = require('express')
 const fileUpload = require('express-fileupload')
+const mw = require('..')
+
 const app = express()
 
 app.use(express.static('public'))
@@ -11,7 +13,7 @@ app.use(fileUpload())
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
-app.post('/upload', (req, res) => {
+app.post('/', (req, res) => {
   let myfile;
   let uploadPath;
 
@@ -24,11 +26,13 @@ app.post('/upload', (req, res) => {
   uploadPath = __dirname + '/../uploaded/' + myfile.name;
 
   // Use the mv() method to place the file somewhere on your server
-  myfile.mv(uploadPath, function(err) {
+  myfile.mv(uploadPath, async err => {
     if (err)
       return res.status(500).send(err);
 
-    res.send('File uploaded!');
+    let result = await mw(uploadPath)
+    console.log(result)
+    res.send(`File uploaded: ${result}`);
   });
 })
 

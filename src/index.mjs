@@ -1,15 +1,8 @@
-//import slug from './slug.txt'
 
-export default {
-  async fetch(request, env) {
-    try {
-      return await handleRequest(request, env)
-    } catch (e) {
-      return new Response(e.message)
-    }
-  }
-}
+export default async req => await handleRequest(req).
+  then(res => res).
+  catch(e => `- err ${e}`)
 
-async function handleRequest(request, env) {
-  return new Response('XAXA') // slug
+async function handleRequest(req) {
+  return req;
 }
