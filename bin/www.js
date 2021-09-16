@@ -3,7 +3,8 @@
 // https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
 const express = require('express')
 const fileUpload = require('express-fileupload')
-const mw = require('..')
+const mw = (...args) => import('../dist/index.mjs').
+  then(({default: mw}) => mw(...args))
 
 const app = express()
 
@@ -30,10 +31,10 @@ app.post('/', (req, res) => {
     if (err)
       return res.status(500).send(err);
 
-    let result = await mw(uploadPath)
+    let result = await mw(uploadPath).catch(e => console.error(e))
     console.log(result)
-    res.send(`File uploaded: ${result}`);
-  });
+    res.send(`File uploaded: ${uploadPath}`);
+  })
 })
 
 const server = app.listen(5000, () => {
