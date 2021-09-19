@@ -6,9 +6,6 @@ dist
 
 package-lock.json
 
-public/bundle.js
-public/bundle.js.map
-
 # Vim
 .*.sw?
 *.vim

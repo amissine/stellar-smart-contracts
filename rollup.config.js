@@ -19,7 +19,7 @@ export default {
 	plugins: [
     json(), // to import 'stellar-sdk'
 		resolve({ preferBuiltins: true }), 
-		commonjs(), // converts date-fns to ES modules
+		commonjs(), // to import from node_modules
 		production && terser() // minify, but only in production
 	]
 };
