@@ -33,7 +33,6 @@ app.post('/', (req, res) => {
 
     let result = await mw(uploadPath).catch(e => console.error(e))
     console.log(`- result: ${result}`)
-// - result: - key e5b1873e8199f82d0810a9fd47f57b97bae90bce9248e28ddfcb402bbaebc29a
     res.send(`File uploaded: ${uploadPath}`);
   })
 })

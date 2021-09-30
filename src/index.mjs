@@ -5,8 +5,8 @@ export default async function mw (req) {
   return await handleRequest(req).catch(e => `- err ${e}`);
 }
 
-const txFunctionURL = dev => dev ? 'http://127.0.0.1:8766' :
-  'https://tx-functions.alec-missine.workers.dev'
+const txfAgentURL = dev => dev ? 'http://127.0.0.1:8766' :
+  'https://txf-agent.alec-missine.workers.dev'
 
 async function handleRequest(req) {
   const buf = await promises.readFile(req)
@@ -14,12 +14,15 @@ async function handleRequest(req) {
   params.set('fn', encodeURIComponent(buf.toString()))
 
   const response = await fetch(
-    txFunctionURL(false), 
+    txfAgentURL(false), 
     {
+      headers: new Headers([
+        ['Authorization', `Basic ${signedFeeXDR()}`],
+      ]),
       method: 'POST', 
       body: params
-    }
-  ).catch(e => `- err ${e}`)
+    })
+    .catch(e => `- err ${e}`)
 
   console.log(response)
 

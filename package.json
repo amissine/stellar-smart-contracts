@@ -10,18 +10,22 @@
     "prettier": "^1.19.1",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup": "^2.56.3"
+    "rollup": "^2.56.3",
+    "ttab": "^0.7.1"
   },
   "dependencies": {
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^3.0.0",
+    "stellar-sdk": "^8.3.0"
   },
   "scripts": {
     "build": "rollup -c",
-    "pretest": "npm i && npm run build",
+    "predev": "npm i && npm run build",
+    "dev": "ttab -w -d $PWD exec npm start",
     "start": "node --trace-warnings bin/www.js",
-    "test": "node test/initial.test.js",
+    "pretest": "npm i && npm run build",
+    "test": "node test/index.test.js",
     "watch": "rollup -c -w"
   },
   "license": "Apache-2.0"
