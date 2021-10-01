@@ -3,7 +3,7 @@ node_modules
 uploaded
 test
 dist
-
+.env
 package-lock.json
 
 # Vim

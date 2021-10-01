@@ -1,20 +1,23 @@
 #!/usr/bin/env node
-// See also:
+
+// See also: {{{1
 // https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
+
 const express = require('express')
 const fileUpload = require('express-fileupload')
-const mw = (...args) => import('../dist/index.mjs').
-  then(({default: mw}) => mw(...args))
+const mw = (...args) => import('../dist/index.mjs')
+  .then(({default: mw}) => mw(...args))
 
 const app = express()
 
 app.use(express.static('public'))
 app.use(fileUpload())
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { // {{{1
   res.sendFile(__dirname + '/index.html')
 })
-app.post('/', (req, res) => {
+
+app.post('/', (req, res) => { // {{{1
   let myfile;
   let uploadPath;
 
@@ -37,7 +40,7 @@ app.post('/', (req, res) => {
   })
 })
 
-const server = app.listen(5000, () => {
+const server = app.listen(5000, () => { // {{{1
   let sa = server.address()
   console.log('- listening at http://%s:%s', sa.address, sa.port)
 })
