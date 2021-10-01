@@ -1,13 +1,15 @@
-import { Asset } from 'stellar-sdk' // {{{1
+import { Asset, Server } from 'stellar-sdk' // {{{1
 
 let config = { // {{{1
   BALANCE_LOW_WATERMARK: 0.001,
   HORIZON_URL: process.env.HORIZON_URL,
   STELLAR_NETWORK: process.env.STELLAR_NETWORK,
+  TXF_AGENT: process.env.TXF_AGENT,
   UPLOAD_DIVISOR: 1000,
   USER_CB_TTL_SECONDS: '2592000', // 3600 * 24 * 30
   asset: Asset.native(),
   balanceUseTxfMin: balanceUseTxfMin(),
+  server: new Server(process.env.HORIZON_URL),
   txFeeCreateTxfMin: txFeeCreateTxfMin(),
 }
 

@@ -53,4 +53,4 @@ function txF_CreatorSecret () { // {{{1
   return process.env.TXF_CREATOR_SECRET;
 }
 // }}}1
-export { fee, } // to test
+export { fee, txF_CreatorAddress, txF_CreatorSecret, signedFeeXDR } // to test
