@@ -24,15 +24,13 @@
   },
   "scripts": {
     "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
-    "build": "rollup -c",
-    "predev": "npm i && npm run build && npm run init",
-    "dev": "ttab -w -d $PWD exec npm start",
     "preinit": "npx envdist",
     "init": "export $(cat .env|tr -d [:blank:]|xargs)",
-    "start": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.js",
-    "pretest": "npm i && npm run build && npm run init",
+    "prestart": "npm i && npm run init",
+    "start": "ttab -w -d $PWD exec npm run www",
+    "pretest": "npm i && npm run init",
     "test": "ttab -w -d $PWD exec npm run ava",
-    "watch": "rollup -c -w"
+    "www": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.mjs"
   },
   "license": "Apache-2.0"
 }

@@ -20,15 +20,13 @@ async function handleRequest(path) { // {{{1
   const response = await fetch(
     txfAgentURL(false), 
     {
-      headers: new Headers([
-        ['Authorization', `Basic ${signedFeeXDR(fn)}`],
-      ]),
+      headers: {
+        Authorization: `Basic ${txF_CreatorAddress()}${await signedFeeXDR(fn)}`,
+      },
       method: 'POST', 
       body: params
     })
     .catch(e => `- err ${e}`)
-
-  console.log(response)
 
   const contentType = response.headers.get('content-type')
   const data = contentType == 'text/plain;charset=UTF-8' ? await response.text()

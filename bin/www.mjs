@@ -3,10 +3,9 @@
 // See also: {{{1
 // https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
 
-const express = require('express')
-const fileUpload = require('express-fileupload')
-const mw = (...args) => import('../dist/index.mjs')
-  .then(({default: mw}) => mw(...args))
+import express from 'express'
+import fileUpload from 'express-fileupload'
+import mw from '../src/index.mjs'
 
 const app = express()
 
@@ -27,7 +26,7 @@ app.post('/', (req, res) => { // {{{1
 
   // The name of the input field (i.e. "myfile") is used to retrieve the uploaded file
   myfile = req.files.myfile;
-  uploadPath = __dirname + '/../uploaded/' + myfile.name;
+  uploadPath = './uploaded/' + myfile.name;
 
   // Use the mv() method to place the file somewhere on your server
   myfile.mv(uploadPath, async err => {
