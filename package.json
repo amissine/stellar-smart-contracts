@@ -15,7 +15,7 @@
     "ttab": "^0.7.1"
   },
   "dependencies": {
-    "bignumber.js": "^4.1.0",
+    "bignumber.js": "^9.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "moment": "^2.29.1",

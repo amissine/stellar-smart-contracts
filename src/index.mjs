@@ -13,15 +13,16 @@ const txfAgentURL = dev => dev ? 'http://127.0.0.1:8766' :
 
 async function handleRequest(path) { // {{{1
   const buf = await promises.readFile(path)
-  const fn = buf.toString()
+  const txF = buf.toString()
+  const fee = txF_Fee(txF)
   const params = new URLSearchParams()
-  params.set('fn', encodeURIComponent(fn))
+  params.set('txF', txF)
 
   const response = await fetch(
     txfAgentURL(false), 
     {
       headers: {
-        Authorization: `Basic ${txF_CreatorAddress()}${await signedFeeXDR(fn)}`,
+        Authorization: `Basic ${txF_CreatorAddress()}${await signedFeeXDR(fee)}`,
       },
       method: 'POST', 
       body: params
@@ -34,13 +35,13 @@ async function handleRequest(path) { // {{{1
   return data;
 }
 
-async function signedFeeXDR (fn) { // {{{1
-  return await sscu.feeXDR(txF_CreatorAddress(), fee(fn))
+async function signedFeeXDR (fee) { // {{{1
+  return await sscu.feeXDR(txF_CreatorAddress(), fee)
   .then(xdr => sscu.signXDR(xdr, txF_CreatorSecret()))
 }
 
-function fee (fn) { // {{{1
-  return new BigNumber(fn.length).dividedBy(config.UPLOAD_DIVISOR).toFixed(7)
+function txF_Fee (txF) { // {{{1
+  return new BigNumber(txF.length).dividedBy(config.UPLOAD_DIVISOR).toFixed(7)
 }
 
 function txF_CreatorAddress () { // {{{1
@@ -51,4 +52,4 @@ function txF_CreatorSecret () { // {{{1
   return process.env.TXF_CREATOR_SECRET;
 }
 // }}}1
-export { fee, txF_CreatorAddress, txF_CreatorSecret, signedFeeXDR } // to test
+export { txF_Fee, txF_CreatorAddress, txF_CreatorSecret, signedFeeXDR } // to test
