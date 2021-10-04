@@ -17,6 +17,7 @@ async function handleRequest(path) { // {{{1
   const fee = txF_Fee(txF)
   const params = new URLSearchParams()
   params.set('txF', txF)
+  params.set('signer', txF_CreatorAddress())
 
   const response = await fetch(
     txfAgentURL(false), 
