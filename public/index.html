@@ -6,27 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+    <p/>Stellar Smart Contracts are called txFunctions. A <b>txFunction</b> runs on a signing server called <b>Stellar Turret</b>. <a href='https://github.com/tyvdh/stellar-turrets'>Stellar Turrets</a> provide for trust-free signing of transactions they process. A Turret signs the supplied transaction only if the txFunction is ok with it.
+    <p/>This implementation assigns a unique <b>key</b> to each txFunction it maintains. Using the UI below, you can:
+    <ul>
+      <li>upload your txFunction to the registry and receive its key;</li>
+      <li>list all registered txFunctions by their keys;</li>
+      <li>get info on a txFunction selected from the list;</li>
+      <li>delete a txFunction if you own it.</li>
+    </ul>
     <form action="/" method='POST' enctype='multipart/form-data' id='form'>
-      <label>Select a txF:</label>
+      <label>Select your txFunction:</label>
       <input type="file" accept='.js, .mjs' id="file" name='myfile'>
       <button onclick='upload()'>Upload</button>
-      <br/><br/>
-      <label>Select a txF key:</label>
-      <select name='keys' id='keys'>
-        <option value='' selected>All txF Keys</option>
-      </select>
-      <button onclick='deleteKey()'>Delete</button>
     </form>
-    <script>
-      function upload () {
-        const form = document.getElementById('form')
-        const path = document.getElementById('file')
-        if (path.value.length > 0) {
-          form.submit()
-        } else {
-          alert('Please select a file.')
-        }
-      }
-    </script>
+    <br/>
+    <div id='cogs'>
+      Retrieving the list of all registered txFunctions... <img src='favicon.ico' id='cogs'/>
+    </div>
+    <div id='selectKeyUI' hidden='true'>
+      <label>Select a txFunction key:</label>
+      <select name='keys' id='keys'>
+        <option value='' disabled='true'>List of all keys</option>
+      </select>
+      <button onclick='getInfo()'>Get Info</button>
+      <button onclick='deleteKey()'>Delete</button>
+    </div>
+    <script src='index.mjs'></script>
   </body>
 </html>

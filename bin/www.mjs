@@ -16,6 +16,18 @@ app.get('/', (req, res) => { // {{{1
   res.sendFile(__dirname + '/index.html')
 })
 
+app.get('/list-all-keys', (req, res) => { // {{{1
+  (async path => await mw(path)
+    .then(a => res.end(JSON.stringify(a)))
+    .catch(e => console.error(e)))('/list-all-keys')
+})
+
+app.get('/delete/:key', (req, res) => { // {{{1
+  (async path => await mw(path, req.params.key)
+    .then(a => res.end(JSON.stringify(a)))
+    .catch(e => console.error(e)))('/delete')
+})
+
 app.post('/', (req, res) => { // {{{1
   let myfile;
   let uploadPath;
