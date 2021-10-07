@@ -18,12 +18,15 @@ const txfAgentURL = dev => dev ? 'http://127.0.0.1:8766' :
   'https://txf-agent.alec-missine.workers.dev'
 
 async function deleteKey (key) { // {{{1
-  console.log(key)
-  return ["OK"];
-
-  return await fetch(`${txfAgentURL(false)}/list`)
-  .then(async response => (await response.json())
-    .concat([txF_CreatorAddress()]));
+  const fee = new BigNumber(config.feeDeleteTxf).toFixed(7)
+  return await fetch(`${txfAgentURL(false)}/${key}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Basic ${txF_CreatorAddress()}${await signedFeeXDR(fee)}`,
+      },
+    })
+  .then(async response => (await response.text()))
 }
 
 async function listAllKeys () { // {{{1
@@ -49,7 +52,6 @@ async function handleRequest(path) { // {{{1
       method: 'POST', 
       body: params
     })
-    .catch(e => `- err ${e}`)
 
   const contentType = response.headers.get('content-type')
   const data = contentType == 'text/plain;charset=UTF-8' ? await response.text()

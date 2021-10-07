@@ -11,13 +11,21 @@ function deleteKey () { // {{{1
       if (key.value.split(' ')[1] != owner) {
         alert('You are not the owner.')
       } else {
+        selectKeyUI.hidden = true
+        cogs.hidden = false
         fetch(`${location}delete/${key.value.split(' ')[0]}`)
         .then(response => response.json())
-        .then(a => {
-          alert(a)
-          selectKeyUI.hidden = true
-          cogs.hidden = false
-          listAllKeys()
+        .then(result => {
+          alert(result)
+          /* FIXME
+          if (result == 'OK') {
+            keys.remove(key)
+            cogs.hidden = true
+            selectKeyUI.hidden = false
+          } else {
+            alert(result)
+          }
+          */
         })
       }
     }

@@ -10,16 +10,16 @@ let config = { // {{{1
   USER_CB_TTL_SECONDS: '2592000', // 3600 * 24 * 30
   asset: Asset.native(),
   balanceUseTxfMin: balanceUseTxfMin(),
+  feeDeleteTxf: feeDeleteTxf(),
   server: new Server(process.env.HORIZON_URL),
-  txFeeCreateTxfMin: txFeeCreateTxfMin(),
+}
+
+function feeDeleteTxf () { // {{{1
+  return +1;
 }
 
 function balanceUseTxfMin() { // {{{1
   return +2; 
-}
-
-function txFeeCreateTxfMin () { // {{{1
-  return +4;
 }
 
 // }}}1
