@@ -6,29 +6,24 @@ let owner
 listAllKeys()
 
 function deleteKey () { // {{{1
-  for (const key of keys.children) {
-    if (key.selected) {
-      if (key.value.split(' ')[1] != owner) {
-        alert('You are not the owner.')
+  const v = keys.value.split(' ')
+  const key = v[0], keyOwner = v[1]
+  if (keyOwner != owner) {
+    alert('You are not the owner.')
+  } else {
+    selectKeyUI.hidden = true
+    cogs.hidden = false
+    fetch(`${location}delete/${key}`)
+    .then(response => response.text())
+    .then(result => {
+      if (result == 'OK') {
+        keys.options[keys.selectedIndex].remove()
+        cogs.hidden = true
+        selectKeyUI.hidden = false
       } else {
-        selectKeyUI.hidden = true
-        cogs.hidden = false
-        fetch(`${location}delete/${key.value.split(' ')[0]}`)
-        .then(response => response.json())
-        .then(result => {
-          alert(result)
-          /* FIXME
-          if (result == 'OK') {
-            keys.remove(key)
-            cogs.hidden = true
-            selectKeyUI.hidden = false
-          } else {
-            alert(result)
-          }
-          */
-        })
+        alert(result)
       }
-    }
+    })
   }
 }
 
@@ -50,6 +45,8 @@ function listAllKeys () { // {{{1
 }
 
 function upload () { // {{{1
+  selectKeyUI.hidden = true
+  cogs.hidden = false
   const form = document.getElementById('form')
   const path = document.getElementById('file')
   if (path.value.length > 0) {

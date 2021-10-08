@@ -24,7 +24,7 @@ app.get('/list-all-keys', (req, res) => { // {{{1
 
 app.get('/delete/:key', (req, res) => { // {{{1
   (async path => await mw(path, req.params.key)
-    .then(a => res.end(JSON.stringify(a)))
+    .then(v => res.end(v))
     .catch(e => console.error(e)))('/delete')
 })
 
@@ -47,7 +47,7 @@ app.post('/', (req, res) => { // {{{1
 
     let result = await mw(uploadPath).catch(e => console.error(e))
     console.log(`- result: ${result}`)
-    res.send(`File uploaded: ${uploadPath}`);
+    res.send(`File uploaded: ${uploadPath} - PLEASE RETURN TO THE PREVIOUS PAGE AND RELOAD IT`);
   })
 })
 
