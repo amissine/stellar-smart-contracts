@@ -31,8 +31,7 @@ async function deleteKey (key) { // {{{1
 
 async function listAllKeys () { // {{{1
   return await fetch(`${txfAgentURL(false)}/list`)
-  .then(async response => (await response.json())
-    .concat([txF_CreatorAddress()]));
+  .then(async response => (await response.json()).concat([txF_CreatorAddress()]));
 }
 
 async function handleRequest(path) { // {{{1

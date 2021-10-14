@@ -12,7 +12,7 @@
       <li>upload your txFunction to the registry and receive its key;</li>
       <li>list all registered txFunctions by their keys;</li>
       <li>get info on a txFunction selected from the list;</li>
-      <li>delete a txFunction if you own it.</li>
+      <li>delete a txFunction from the registry - if you own it.</li>
     </ul>
     <form action="/" method='POST' enctype='multipart/form-data' id='form'>
       <label>Select your txFunction:</label>
@@ -31,6 +31,7 @@
       <button onclick='getInfo()'>Get Info</button>
       <button onclick='deleteKey()'>Delete</button>
     </div>
+    <p/>This UI is far from perfect, feel free to improve it!
     <script src='index.mjs'></script>
   </body>
 </html>

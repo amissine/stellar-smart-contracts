@@ -5,9 +5,15 @@ let owner
 
 listAllKeys()
 
+function getInfo () { // {{{1
+  const info = keys.value.split(' ')[1]
+  console.log(info)
+  alert(info)
+}
+
 function deleteKey () { // {{{1
-  const v = keys.value.split(' ')
-  const key = v[0], keyOwner = v[1]
+  const v = keys.value.split(' '), info = JSON.parse(v[1])
+  const key = v[0], keyOwner = info.signer
   if (keyOwner != owner) {
     alert('You are not the owner.')
   } else {
@@ -33,9 +39,9 @@ function listAllKeys () { // {{{1
   .then(a => {
     owner = a.pop()
     while (a.length > 0) {
-      const key = a.shift(), keyOwner = a.shift()
+      const key = a.shift(), keyInfo = JSON.stringify(a.shift())
       let opt = document.createElement("option")
-      opt.value = `${key} ${keyOwner}`
+      opt.value = `${key} ${keyInfo}`
       opt.text = `${key.slice(0, 9)}…${key.slice(-9)}`
       keys.add(opt)
     }
