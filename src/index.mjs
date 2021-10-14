@@ -38,6 +38,8 @@ async function handleRequest(path) { // {{{1
   const buf = await promises.readFile(path)
   const txF = buf.toString()
   const fee = txF_Fee(txF)
+  console.log(`- txF_Fee is ${fee}`)
+
   const params = new URLSearchParams()
   params.set('txF', txF)
   params.set('signer', txF_CreatorAddress())
