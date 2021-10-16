@@ -30,7 +30,7 @@
     "start": "ttab -w -d $PWD exec npm run www",
     "pretest": "npm i && npm run init",
     "test": "ttab -w -d $PWD exec npm run ava",
-    "www": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.mjs"
+    "www": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.mjs || read"
   },
   "license": "Apache-2.0"
 }

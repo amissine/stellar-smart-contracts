@@ -17,13 +17,15 @@ export default async function mw (path, ...args) { // {{{1
 const txfAgentURL = dev => dev ? 'http://127.0.0.1:8766' :
   'https://txf-agent.alec-missine.workers.dev'
 
+const txF_CreatorUrl = dev => dev ? 'http://127.0.0.1:6000' : 'FIXME: txF_CreatorUrl'
+
 async function deleteKey (key) { // {{{1
   const fee = new BigNumber(config.feeDeleteTxf).toFixed(7)
   return await fetch(`${txfAgentURL(false)}/${key}`,
     {
       method: 'DELETE',
       headers: {
-        Authorization: `Basic ${txF_CreatorAddress()}${await signedFeeXDR(fee)}`,
+        Authorization: `Basic ${await signedFeeXDR(fee)}`,
       },
     })
   .then(async response => (await response.text()))
@@ -31,7 +33,7 @@ async function deleteKey (key) { // {{{1
 
 async function listAllKeys () { // {{{1
   return await fetch(`${txfAgentURL(false)}/list`)
-  .then(async response => (await response.json()).concat([txF_CreatorAddress()]));
+  .then(async res => (await res.json()).concat([process.env.TXF_CREATOR]));
 }
 
 async function handleRequest(path) { // {{{1
@@ -42,13 +44,13 @@ async function handleRequest(path) { // {{{1
 
   const params = new URLSearchParams()
   params.set('txF', txF)
-  params.set('signer', txF_CreatorAddress())
+  params.set('signer', process.env.TXF_CREATOR)
 
   const response = await fetch(
     txfAgentURL(false), 
     {
       headers: {
-        Authorization: `Basic ${txF_CreatorAddress()}${await signedFeeXDR(fee)}`,
+        Authorization: `Basic ${await signedFeeXDR(fee)}`,
       },
       method: 'POST', 
       body: params
@@ -61,20 +63,14 @@ async function handleRequest(path) { // {{{1
 }
 
 async function signedFeeXDR (fee) { // {{{1
-  return await sscu.feeXDR(txF_CreatorAddress(), fee)
-  .then(xdr => sscu.signXDR(xdr, txF_CreatorSecret()))
+  const params = new URLSearchParams()
+  params.set('fee', fee.toString())
+  return await fetch(txF_CreatorUrl(true), { method: 'POST', body: params })
+  .then(async response => await response.text());
 }
 
 function txF_Fee (txF) { // {{{1
   return new BigNumber(txF.length).dividedBy(config.UPLOAD_DIVISOR).toFixed(7)
 }
-
-function txF_CreatorAddress () { // {{{1
-  return process.env.TXF_CREATOR;
-}
-
-function txF_CreatorSecret () { // {{{1
-  return process.env.TXF_CREATOR_SECRET;
-}
 // }}}1
-export { txF_Fee, txF_CreatorAddress, txF_CreatorSecret, signedFeeXDR } // to test
+export { txF_Fee, signedFeeXDR } // to test
