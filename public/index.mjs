@@ -14,7 +14,7 @@ function getInfo () { // {{{1
 function deleteKey () { // {{{1
   const v = keys.value.split(' '), info = JSON.parse(v[1])
   const key = v[0], keyOwner = info.signer
-  if (keyOwner != owner) {
+  if (keyOwner && keyOwner != owner) {
     alert('You are not the owner.')
   } else {
     selectKeyUI.hidden = true

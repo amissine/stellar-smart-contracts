@@ -28,7 +28,7 @@ async function deleteKey (key) { // {{{1
         Authorization: `Basic ${await signedFeeXDR(fee)}`,
       },
     })
-  .then(async response => (await response.text()))
+  .then(async response => await response.text());
 }
 
 async function listAllKeys () { // {{{1
@@ -44,7 +44,6 @@ async function handleRequest(path) { // {{{1
 
   const params = new URLSearchParams()
   params.set('txF', txF)
-  params.set('signer', process.env.TXF_CREATOR)
 
   const response = await fetch(
     txfAgentURL(false), 
