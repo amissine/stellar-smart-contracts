@@ -4,8 +4,8 @@ uploaded
 test
 dist
 .env
+.env.dist
 package-lock.json
 
 # Vim
 .*.sw?
-*.session
