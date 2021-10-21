@@ -1,8 +1,8 @@
-# update-local usage example: {{{1
+# update-dist usage example: {{{1
 #
-#   update-local TXF_AGENT $TXF_AGENT TXF_AGENT_SECRET $TXF_AGENT_SECRET
+#   update-dist TXF_AGENT $TXF_AGENT TXF_AGENT_SECRET $TXF_AGENT_SECRET
 #
-update-local () {
+update-dist () {
   local GK=$1
   local GV=$2
   local SK=$3
@@ -18,42 +18,21 @@ update-local () {
     -e "s/${U2}/${U2} # ${SV}/g" > ${FILE}
 }
 
-# update-pms-smart-nft-00 usage example: {{{1
+# update-template usage example: {{{1
 #
-#   update-pms-smart-nft-00  TXF_AGENT $TXF_AGENT
+#   update-template  TXF_AGENT $TXF_AGENT
 #
-# TODO use update-public instead
-#
-update-pms-smart-nft-00 () {
+update-template () {
   local GK=$1
   local GV=$2
-  local FILE='../pms-smart-nft-00/.env.dist.template'
+  local FILE='./.env.dist.template'
   local UPDATE="$GK = <Stellar public key>"
   echo
   echo "- updating '${UPDATE}' in ${FILE} with:"
   echo "  ${UPDATE} # ${GV}"
 
-  cat ${FILE} | sed -e "s/${UPDATE}/${UPDATE} # ${GV}/g" > ${FILE}.updated
-  mv ${FILE}.updated ${FILE}
-}
-
-# update-stellar-smart-contracts usage example: {{{1
-#
-#   update-stellar-smart-contracts  TXF_AGENT $TXF_AGENT
-#
-# TODO use update-public instead
-#
-update-stellar-smart-contracts () {
-  local GK=$1
-  local GV=$2
-  local FILE='../stellar-smart-contracts/.env.dist.template'
-  local UPDATE="$GK = <Stellar public key>"
-  echo
-  echo "- updating '${UPDATE}' in ${FILE} with:"
-  echo "  ${UPDATE} # ${GV}"
-
-  cat ${FILE} | sed -e "s/${UPDATE}/${UPDATE} # ${GV}/g" > ${FILE}.updated
-  mv ${FILE}.updated ${FILE}
+  cat ${FILE} | sed -e "s/${UPDATE}/${UPDATE} # ${GV}/g" > ${FILE}.updated \
+  && mv ${FILE}.updated ${FILE}
 }
 
 # line-count usage example: {{{1
@@ -70,5 +49,24 @@ line-count () {
 #
 item-count () {
   cat $1 | grep $2 | grep "$3" | wc -l | xargs
+}
+
+# validate-args usage example: {{{1
+#
+#   validate-args TXF_AGENT $TXF_AGENT TXF_AGENT_SECRET $TXF_AGENT_SECRET
+#
+validate-args () {
+  local GK=$1
+  local GV=$2
+  local SK=$3
+  local SV=$4
+  if [ ${#GV} -ne 56 -o ${#SV} -ne 56 \
+    -o "${GV:0:1}" != "G" -o "${SV:0:1}" != "S" ]
+  then
+    echo 'Invalid args:'
+    echo "- $GK        = $GV"
+    echo "- $SK = $SV"
+    exit 1
+  fi
 }
 

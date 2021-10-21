@@ -204,7 +204,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 2 - ((1 * winheight(0) + 2) / 4)
+let s:l = 2 - ((0 * winheight(0) + 2) / 4)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -463,7 +463,7 @@ normal! 0
 wincmd w
 argglobal
 if bufexists("package.json") | buffer package.json | else | edit package.json | endif
-balt .env.dist.template.updated
+balt update-agent.sh
 setlocal noautoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -579,12 +579,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 27 - ((10 * winheight(0) + 10) / 20)
+let s:l = 33 - ((15 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-27
-normal! 051|
+33
+normal! 05|
 wincmd w
 argglobal
 if bufexists(".gitignore") | buffer .gitignore | else | edit .gitignore | endif
@@ -2105,7 +2105,9 @@ badd +1 public/index.mjs
 badd +1 src/index.mjs
 badd +1 src/stellar-smart-contract-utils.mjs
 badd +1 .env.dist
+badd +1 .env.dist.template
 badd +1 package.json
+badd +1 .env.dist.template.updated
 badd +1 README.md
 badd +1 public/index.html
 badd +1 bin/www.mjs
@@ -2121,8 +2123,7 @@ badd +1 src/slug.txt
 badd +1 src/sandbox.mjs
 badd +1 test/index.test.js
 badd +1 public/index.js
-badd +0 .env.dist.template
-badd +0 .env.dist.template.updated
+badd +3 update-agent.sh
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

@@ -8,6 +8,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "ava": "^3.15.0",
+    "envdist": "^1.0.14",
     "prettier": "^1.19.1",
     "rollup": "^2.56.3",
     "rollup-plugin-copy": "^3.3.0",
@@ -24,8 +25,7 @@
   },
   "scripts": {
     "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
-    "preinit": "cp .env.dist.template .env.dist && npx envdist",
-    "init": "export $(cat .env|tr -d [:blank:]|xargs)",
+    "init": "envdist",
     "prestart": "npm i && npm run init",
     "start": "ttab -w -d $PWD exec npm run www",
     "pretest": "npm i && npm run init",
