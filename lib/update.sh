@@ -33,6 +33,8 @@ update-template () {
 
   cat ${FILE} | sed -e "s/${UPDATE}/${UPDATE} # ${GV}/g" > ${FILE}.updated \
   && mv ${FILE}.updated ${FILE}
+
+  npm run init
 }
 
 # line-count usage example: {{{1
