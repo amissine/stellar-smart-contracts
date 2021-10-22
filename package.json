@@ -25,10 +25,8 @@
   },
   "scripts": {
     "ava": "export $(cat .env|tr -d [:blank:]|xargs) && ava --verbose --watch test/*.test.mjs",
-    "init": "envdist",
-    "prestart": "npm i && npm run init",
+    "init": "cp ./.env.dist.template ./.env.dist && envdist",
     "start": "ttab -w -d $PWD exec npm run www",
-    "pretest": "npm i && npm run init",
     "test": "ttab -w -d $PWD exec npm run ava",
     "www": "export $(cat .env|tr -d [:blank:]|xargs) && node --trace-warnings bin/www.mjs || read"
   },
