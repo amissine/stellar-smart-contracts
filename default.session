@@ -836,7 +836,6 @@ normal! zt
 2
 normal! 047|
 wincmd w
-4wincmd w
 exe '1resize ' . ((&lines * 4 + 24) / 49)
 exe '2resize ' . ((&lines * 5 + 24) / 49)
 exe '3resize ' . ((&lines * 5 + 24) / 49)
@@ -991,14 +990,14 @@ normal! zo
 normal! zo
 14
 normal! zo
-36
+40
 normal! zo
-let s:l = 17 - ((1 * winheight(0) + 23) / 46)
+let s:l = 20 - ((7 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-17
-normal! 018|
+20
+normal! 03|
 wincmd w
 argglobal
 if bufexists("public/index.html") | buffer public/index.html | else | edit public/index.html | endif
@@ -1536,17 +1535,21 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
+1
+normal! zo
 22
 normal! zo
 39
 normal! zo
 64
 normal! zo
-let s:l = 47 - ((25 * winheight(0) + 23) / 46)
+71
+normal! zo
+let s:l = 1 - ((0 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
+1
 normal! 0
 wincmd w
 argglobal
@@ -1955,12 +1958,12 @@ exe s:l
 normal! zt
 23
 normal! 0
-tabnext 1
+tabnext 2
 set stal=1
 badd +1 .env
 badd +6 .gitignore
 badd +1 public/index.mjs
-badd +1 src/index.mjs
+badd +45 src/index.mjs
 badd +1 src/stellar-smart-contract-utils.mjs
 badd +1 .env.dist
 badd +1 .env.dist.template
@@ -1993,7 +1996,6 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

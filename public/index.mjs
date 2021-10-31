@@ -14,6 +14,10 @@ function getInfo () { // {{{1
 function deleteKey () { // {{{1
   const v = keys.value.split(' '), info = JSON.parse(v[1])
   const key = v[0], keyOwner = info.signer
+  if (key == '171dda83958894a3be20b5598eba74d9323af5366965e804f0b27d9e1524b236') {
+    alert('Please keep this key as it is used in tests.')
+    return;
+  }
   if (keyOwner && keyOwner != owner) {
     alert('You are not the owner.')
   } else {
