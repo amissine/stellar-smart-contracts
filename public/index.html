@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <p/>Stellar Smart Contracts are called txFunctions. A <b>txFunction</b> runs on a signing server called <b>Stellar Turret</b>. <a href='https://github.com/tyvdh/stellar-turrets'>Stellar Turrets</a> provide for trust-free signing of transactions they process. A Turret signs the supplied transaction only if the txFunction is ok with it.
-    <p/>This implementation assigns a unique <b>key</b> to each txFunction it maintains. Using the UI below, you can:
+    <p/>This is my attempt to provide for maintenance of <b>Stellar Smart Contracts</b>. It is based on <b>Tyler van der Hoeven</b>'s <a href='https://github.com/tyvdh/stellar-turrets'>Stellar Turrets</a>. In a nutshell, a Stellar Smart Contract (we call it a <b>txFunction</b>) runs on a signing server called <b>Stellar Turret</b>. The turret provides for trust-free signing of transactions it processes. The turret signs the supplied transaction only if its txFunction is ok with it.
+    <p/>This implementation assigns a unique <b>key</b> to each txFunction / turret it maintains. Using the UI below, you can:
     <ul>
       <li>upload your txFunction to the registry and receive its key;</li>
-      <li>list all registered txFunctions by their keys;</li>
-      <li>get info on a txFunction selected from the list;</li>
+      <li>list all registered txFunctions / turrets by their keys;</li>
+      <li>get info on a txFunction / turret selected from the list;</li>
       <li>delete a txFunction from the registry - if you own it.</li>
     </ul>
     <form action="/" method='POST' enctype='multipart/form-data' id='form'>
