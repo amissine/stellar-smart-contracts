@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "- running $0 in $PWD..."; echo
+echo "- starting $0 in $PWD..."; echo
 
 # Start the Stellar Smart Contracts server
 npx ttab -w -d $PWD exec npm run www
@@ -9,5 +9,5 @@ npx ttab -w -d $PWD exec npm run www
 for dir in $*; do
   cd $dir
   $0
-  cd -
+  cd - > /dev/null
 done

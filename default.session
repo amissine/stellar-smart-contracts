@@ -711,12 +711,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 12 - ((11 * winheight(0) + 10) / 20)
+let s:l = 3 - ((2 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-12
-normal! 06|
+3
+normal! 013|
 wincmd w
 argglobal
 if bufexists(".gitignore") | buffer .gitignore | else | edit .gitignore | endif
@@ -836,11 +836,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 11 - ((7 * winheight(0) + 4) / 8)
+let s:l = 10 - ((6 * winheight(0) + 4) / 8)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-11
+10
 normal! 0
 wincmd w
 argglobal
@@ -2104,13 +2104,14 @@ badd +1 src/stellar-smart-contract-utils.mjs
 badd +1 .env.dist
 badd +1 .env.dist.template
 badd +1 package.json
-badd +3 update-agent.sh
+badd +1 test/it1.sh
 badd +1 README.md
 badd +1 public/index.html
 badd +1 bin/www.mjs
 badd +1 src/config.mjs
 badd +6 test/index.test.mjs
 badd +8 test/sscu.test.mjs
+badd +3 update-agent.sh
 badd +1 .env.dist.template.updated
 badd +22 rollup.config.js
 badd +37 bin/www.js
@@ -2121,7 +2122,6 @@ badd +1 src/slug.txt
 badd +1 src/sandbox.mjs
 badd +1 test/index.test.js
 badd +1 public/index.js
-badd +0 test/it1.sh
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
